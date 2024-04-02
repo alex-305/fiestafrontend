@@ -13,9 +13,10 @@ export const login = async (username:string, password:string) => {
             'Content-Type' : 'application/json'
         }
     });
-    console.log('Login successful: ', response.data)
+    return response.status
     } catch(err) {
         console.log("Error: ", err)
+            return err.response.status
     }
 }
 
@@ -30,8 +31,9 @@ export const createAccount = async(username:string, password:string) => {
                 'Content-Type' : 'application/json'
             }
         });
-        console.log('Account creation successful: ', response.data)
+        return response.status
     } catch(err) {
         console.log('Error: ', err)
+        return err.response.status
     }
 }

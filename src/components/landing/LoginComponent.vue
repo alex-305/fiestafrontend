@@ -4,33 +4,40 @@
             <div class="inputDivs">
             <p>Username</p>
             <input
-            type="text"
-            v-model="username">
+                type="text"
+                v-model="username">
             </div>
             <div class="inputDivs">
             <p>Password</p>
             <input
-            type="password"
-            v-model="password">
+                type="password"
+                v-model="password">
             </div>
         </div>
         <div class="loginButtonDiv">
             <button class="loginButton positiveButton" @click="postLogin">Login</button>
         </div>
     </div>
+    <div class="invalidPassword">
+        <p v-if="StatusCode===401">Invalid password</p>
+    </div>
     
 </template>
 
 <script setup lang="ts">
 import { login } from '@/Helpers/http/auth'
+import { Console } from 'console';
 import { ref } from 'vue'
 
     const password = ref("");
     const username = ref("");
-    const postLogin = () => { 
+    let StatusCode = ref(0)
+    const postLogin = async () => { 
             if(password.value!="" && username.value!="") {
-            login(username.value, password.value)
+            StatusCode.value = await login(username.value, password.value) ?? 0
+            console.log(StatusCode.value)
         }
+        
     }
 
 </script>
@@ -54,6 +61,10 @@ input {
 }
 .loginButton {
     height: 100%;
+}
+
+.invalidPassword p {
+    color: #ff1717;
 }
 
 </style>@/assets/Helpers/server@/assets/Helpers/server
