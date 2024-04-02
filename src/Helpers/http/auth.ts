@@ -24,6 +24,11 @@ export const createAccount = async(username:string, password:string) => {
         const response = await axios.post(SERVER_BASE_URL+'/createAccount', {
             username: username,
             password: password
+        },
+        {
+            headers: {
+                'Content-Type' : 'application/json'
+            }
         });
         console.log('Account creation successful: ', response.data)
     } catch(err) {

@@ -9,8 +9,16 @@
 
 body {
   font-family: 'Poppins', sans-serif;
-  background-color: var(--bgColor);
+  /* background-color: var(--bgColor); */
   color: var(--bodyColor);
+  background: radial-gradient(
+    circle,
+    #ffcdcd 0%,
+    #ffdac5 10%,
+    #fff1c4 40%,
+    #cfffff 70%,
+    #d2e9ff 90%
+  );
 }
 
 button {
@@ -87,7 +95,7 @@ input:focus {
 }
 
 .positiveButton {
-  background: linear-gradient(to right,#79ff87bf, #5daecebf);
+  background: linear-gradient(to right,#79ff87bf, #8adeffbf);
 }
 
 .neutralButton {
