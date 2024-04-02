@@ -1,0 +1,95 @@
+
+:root {
+  --buttonGreen: #5dceb5;
+  --darkbuttonGreen: #3b695f;
+  --bodyColor: #2d3436;
+  --bgColor: #f1f1f6;
+  --darkerbgColor: #9090ac;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--bgColor);
+  color: var(--bodyColor);
+}
+
+button {
+  padding: 5px;
+  background-color: var(--buttonGreen);  
+  font-size: 15px;
+  cursor: pointer;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  box-shadow:
+    0 4px 16px 0 rgba(0, 0, 0, 0.1),
+    0 6px 20px 0 rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+  filter: brightness(0.9);
+  box-shadow:
+    0 4px 16px 0 rgba(0, 0, 0, 0.2),
+    0 6px 20px 0 rgba(0, 0, 0, 0.2);
+}
+
+button:active:hover {
+  transform: perspective(500px) rotateX(20deg) scale(0.9);
+  background: radial-gradient(circle, var(--buttonGreen), lightgray);
+}
+
+input {
+  outline: none;
+  background-color: transparent;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+}
+
+input:focus {
+  border: 1px solid black;
+}
+
+.boxShadow {
+  box-shadow:
+    0 4px 16px 0 rgba(0, 0, 0, 0.1),
+    0 6px 20px 0 rgba(0, 0, 0, 0.1);
+}
+
+.staticBoxShadow {
+  box-shadow:
+  0 4px 16px 0 rgba(0, 0, 0, 0.15),
+  0 6px 20px 0 rgba(0, 0, 0, 0.15);
+}
+
+.boxShadow:active, .boxShadow:focus, .boxShadow:hover {
+  box-shadow:
+    0 4px 16px 0 rgba(0, 0, 0, 0.2),
+    0 6px 20px 0 rgba(0, 0, 0, 0.2);
+}
+
+.containerDiv {
+  width: 100%;
+  display: grid;
+  place-items: center;
+}
+
+.nodeDiv {
+  border: none;
+  border-radius: 10px;
+  text-align: center;
+  width: 35%;
+  height: 110%;
+  margin-bottom: 10px;
+}
+
+.negativeButton {
+  background: linear-gradient(to right, #c85dcebf,#CE5D76bf);
+}
+
+.positiveButton {
+  background: linear-gradient(to right,#79ff87bf, #5daecebf);
+}
+
+.neutralButton {
+  background-color: #5DAECE;
+}
