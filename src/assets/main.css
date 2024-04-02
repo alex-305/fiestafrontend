@@ -101,3 +101,7 @@ input:focus {
 .neutralButton {
   background-color: #5DAECE;
 }
+
+.invalidRequest p {
+  color: #ff1717;
+}

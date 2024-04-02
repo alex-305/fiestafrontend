@@ -18,7 +18,7 @@
             <button class="loginButton positiveButton" @click="postLogin">Login</button>
         </div>
     </div>
-    <div class="invalidPassword">
+    <div class="invalidRequest">
         <p v-if="StatusCode===401">Invalid password</p>
     </div>
     
@@ -26,7 +26,6 @@
 
 <script setup lang="ts">
 import { login } from '@/Helpers/http/auth'
-import { Console } from 'console';
 import { ref } from 'vue'
 
     const password = ref("");
@@ -61,10 +60,6 @@ input {
 }
 .loginButton {
     height: 100%;
-}
-
-.invalidPassword p {
-    color: #ff1717;
 }
 
 </style>@/assets/Helpers/server@/assets/Helpers/server

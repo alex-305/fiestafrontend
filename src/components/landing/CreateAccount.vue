@@ -9,6 +9,11 @@
                 id="username"
                 >
             </div>
+            <div class="takenDiv">
+                <div v-if="status===500" class="invalidRequest">
+                    <p>Username is taken.</p>
+                </div>
+            </div>
             <div class="inputDivs">
                 <p>Make a Password</p>
                 <input
@@ -30,14 +35,20 @@ import { ref } from 'vue'
 import { createAccount } from '@/Helpers/http/auth';
 const username = ref("")
 const password = ref("")
+let status = ref(0)
 
-const postCreateAccount = () => {
+const postCreateAccount = async () => {
     if(username.value != "" && password.value != "") {
-        createAccount(username.value, password.value) 
+        status.value = await createAccount(username.value, password.value) 
     }
 }
 
 </script>
 
 <style scoped>
+.takenDiv {
+    height: 20px;
+}
+
+
 </style>
