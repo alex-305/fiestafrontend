@@ -10,8 +10,11 @@
                 >
             </div>
             <div class="takenDiv">
-                <div v-if="status===500" class="invalidRequest">
+                <div v-if="status===401" class="invalidRequest">
                     <p>Username is taken.</p>
+                </div>
+                <div v-else-if="status===500" class="invalidRequest">
+                    <p>Error.</p>
                 </div>
             </div>
             <div class="inputDivs">
@@ -32,7 +35,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { createAccount } from '@/Helpers/http/auth';
+import { createAccount } from '@/middleware/auth';
 const username = ref("")
 const password = ref("")
 let status = ref(0)

@@ -4,12 +4,14 @@
             <div class="inputDivs">
             <p>Username</p>
             <input
+                name="username"
                 type="text"
                 v-model="username">
             </div>
             <div class="inputDivs">
             <p>Password</p>
             <input
+                name="password"
                 type="password"
                 v-model="password">
             </div>
@@ -25,7 +27,7 @@
 </template>
 
 <script setup lang="ts">
-import { login } from '@/Helpers/http/auth'
+import { login } from '@/middleware/auth'
 import { ref } from 'vue'
 
     const password = ref("");

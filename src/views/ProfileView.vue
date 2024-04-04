@@ -6,7 +6,7 @@
         <div class="staticBoxShadow nodeDiv userDivs">
             <h3 class="data">@{{ username }}</h3>
             <div class="nameDescDivider"></div>
-            <p class="data">{{ biography }}</p>
+            <p class="data">{{ description }}</p>
         </div>
         <br>
         <div class="fiestasDiv">
@@ -17,8 +17,27 @@
 
 <script setup lang="ts">
 import NavBar from '@/components/NavBar.vue';
-const username = "alex"
-const biography = "something about me whatever lorem ipsum the quick brown fox jumps over the lazy dog type"
+import { GetUser } from '@/middleware/getuser'
+import type { User }  from '@/middleware/getuser'
+import { onMounted, ref } from 'vue';
+import { useRoute } from 'vue-router';
+
+const username = ref("")
+const description = ref("")
+
+onMounted(async () => {
+    const route = useRoute()
+
+    const uname = route.params.username.toString()
+    try {
+        const user:User = await GetUser(uname);
+        username.value = user.username
+        description.value = user.description
+    } catch {
+        console.error(Error)
+    }
+
+})
 
 </script>
 
@@ -49,6 +68,10 @@ const biography = "something about me whatever lorem ipsum the quick brown fox j
 
 .fiestasDiv {
     background-color: var(--darkerbgColor);
-    border-radius: 20px;
+    border-radius: 20%;
+}
+.fiestasDiv h2 {
+    padding-right: 10px;
+    padding-left: 10px;
 }
 </style>

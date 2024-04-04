@@ -11,7 +11,8 @@
 
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
-import { routes, routeLeft, routeRight } from '@/Helpers/routeHandler'
+import { routeLeft, routeRight } from '@/Helpers/routing/routeHandler'
+import { getRoutes } from '@/Helpers/routing/NavBarRoutes'
 import { onMounted, onUnmounted } from 'vue'
 
 onMounted(() => {
@@ -29,6 +30,7 @@ const handleArrowKeys = (event:KeyboardEvent) => {
 }
 
 const router = useRouter()
+const routes = getRoutes()
 
 const routeHandler = (url: string) => {
   router.push(url)
