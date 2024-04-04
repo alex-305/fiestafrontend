@@ -16,11 +16,11 @@ import NavBar from '@/components/NavBar.vue'
 import UserInfoComponent from '@/components/profile/UserInfoComponent.vue'
 import { GetUser } from '@/middleware/getuser'
 import type { ResponseData } from '@/middleware/getuser'
-import { onBeforeMount, onMounted, ref } from 'vue'
+import { onBeforeMount, ref } from 'vue'
 import { useRoute } from 'vue-router'
 
-const username = ref('test')
-const description = ref('another test')
+const username = ref("")
+const description = ref("")
 const canEdit = ref(false)
 const isDataloaded = ref(false)
 
@@ -30,9 +30,7 @@ onBeforeMount(async () => {
 
   try {
     const response: ResponseData = await GetUser(uname)
-    console.log('username.value: ' + username.value)
     username.value = response.user.username
-    console.log(response.user.username)
     description.value = response.user.description
     canEdit.value = response.canEdit
     isDataloaded.value = true

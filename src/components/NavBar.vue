@@ -57,12 +57,14 @@ onUnmounted(() => {
 }
 
 .active {
-  color: var(--bodyColor);
+  color: white;
+  text-shadow: 2px 2px 4px black;
+  background: linear-gradient(to right, var(--buttonGreen), var(--buttonGreenAlt));
 }
 
 .inactive {
-  color: white;
-  background-color: var(--darkerbgColor);
+  color: var(--bodyColor);
+  background: linear-gradient(to right, #bcffb1,#bbfffa);
   font-size: 15px;
 }
 

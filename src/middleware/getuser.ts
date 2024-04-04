@@ -21,7 +21,7 @@ export const GetUser = async (user: string): Promise<ResponseData> => {
     })
     .then((response) => {
       console.log('success:', response.data.User)
-      console.log(response.data.User.Username)
+      console.log(response.data)
 
       return response
     })
@@ -36,7 +36,7 @@ export const GetUser = async (user: string): Promise<ResponseData> => {
 
   const responseData: ResponseData = {
     user: userData,
-    canEdit: response.data.canEdit
+    canEdit: response.data.CanEdit
   }
   return responseData
 }

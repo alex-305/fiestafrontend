@@ -4,6 +4,8 @@
   --bodyColor: #2d3436;
   --bgColor: #f1f1f6;
   --darkerbgColor: #9090ac;
+
+  --buttonGreenAlt: #5d90ce;
 }
 
 body {
@@ -22,7 +24,7 @@ body {
 
 button {
   padding: 5px;
-  background-color: var(--buttonGreen);
+  background: linear-gradient(to right, var(--buttonGreen), var(--buttonGreenAlt));
   font-size: 15px;
   cursor: pointer;
   font-weight: bold;
