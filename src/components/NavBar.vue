@@ -1,11 +1,14 @@
 <template>
   <div class="navbar">
-    <button v-for="route in routes"
-        class="navnode"
-        :key="route.url"
-        @click="routeHandler(route.url)"
-        :class="{'active': $route.path === route.url, 'inactive': $route.path !== route.url}"
-        >{{ route.name }}</button>
+    <button
+      v-for="route in routes"
+      class="navnode"
+      :key="route.url"
+      @click="routeHandler(route.url)"
+      :class="{ active: $route.path === route.url, inactive: $route.path !== route.url }"
+    >
+      {{ route.name }}
+    </button>
   </div>
 </template>
 
@@ -19,11 +22,11 @@ onMounted(() => {
   document.addEventListener('keyup', handleArrowKeys)
 })
 
-const handleArrowKeys = (event:KeyboardEvent) => {
-  if(event.ctrlKey && !event.shiftKey && !event.altKey && !event.metaKey) {
-    if(event.key === 'ArrowLeft') {
+const handleArrowKeys = (event: KeyboardEvent) => {
+  if (event.ctrlKey && !event.shiftKey && !event.altKey && !event.metaKey) {
+    if (event.key === 'ArrowLeft') {
       routeLeft()
-    } else if(event.key === 'ArrowRight') {
+    } else if (event.key === 'ArrowRight') {
       routeRight()
     }
   }
@@ -39,11 +42,9 @@ const routeHandler = (url: string) => {
 onUnmounted(() => {
   document.removeEventListener('keyup', handleArrowKeys)
 })
-
 </script>
 
 <style scoped>
-
 .navbar {
   display: flex;
   padding: 5px;
@@ -54,7 +55,6 @@ onUnmounted(() => {
   margin-bottom: 20px;
   border-radius: 10px;
 }
-
 
 .active {
   color: var(--bodyColor);
@@ -70,6 +70,5 @@ onUnmounted(() => {
   margin-left: 5px;
   margin-right: 5px;
 }
-
 </style>
 @/assets/Helpers/routeHandler

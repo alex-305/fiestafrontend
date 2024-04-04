@@ -1,4 +1,3 @@
-
 :root {
   --buttonGreen: #5dceb5;
   --darkbuttonGreen: #3b695f;
@@ -23,7 +22,7 @@ body {
 
 button {
   padding: 5px;
-  background-color: var(--buttonGreen);  
+  background-color: var(--buttonGreen);
   font-size: 15px;
   cursor: pointer;
   font-weight: bold;
@@ -65,11 +64,13 @@ input:focus {
 
 .staticBoxShadow {
   box-shadow:
-  0 4px 16px 0 rgba(0, 0, 0, 0.15),
-  0 6px 20px 0 rgba(0, 0, 0, 0.15);
+    0 4px 16px 0 rgba(0, 0, 0, 0.15),
+    0 6px 20px 0 rgba(0, 0, 0, 0.15);
 }
 
-.boxShadow:active, .boxShadow:focus, .boxShadow:hover {
+.boxShadow:active,
+.boxShadow:focus,
+.boxShadow:hover {
   box-shadow:
     0 4px 16px 0 rgba(0, 0, 0, 0.2),
     0 6px 20px 0 rgba(0, 0, 0, 0.2);
@@ -91,15 +92,15 @@ input:focus {
 }
 
 .negativeButton {
-  background: linear-gradient(to right, #c85dcebf,#CE5D76bf);
+  background: linear-gradient(to right, #c85dcebf, #ce5d76bf);
 }
 
 .positiveButton {
-  background: linear-gradient(to right,#79ff87bf, #8adeffbf);
+  background: linear-gradient(to right, #79ff87bf, #8adeffbf);
 }
 
 .neutralButton {
-  background-color: #5DAECE;
+  background-color: #5daece;
 }
 
 .invalidRequest p {

@@ -1,9 +1,16 @@
 import { defineStore } from 'pinia'
+import { ref } from 'vue'
 
 export const useUserStore = defineStore('userStore', () => {
-  let username
+  const username = ref('')
 
-  const changeUsername = (name:string) => { username = name }
+  const changeUsername = (name: string) => {
+    username.value = name
+  }
 
-  return { username, changeUsername }
+  const getUsername = (): string => {
+    return username.value
+  }
+
+  return { getUsername, changeUsername }
 })

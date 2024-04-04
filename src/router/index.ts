@@ -20,14 +20,13 @@ const router = createRouter({
     {
       path: '/create',
       name: 'create',
-      component: CreateView  
+      component: CreateView
     },
     {
       path: '/user/:username',
       name: 'UserProfile',
       component: ProfileView
     }
-
   ]
 })
 

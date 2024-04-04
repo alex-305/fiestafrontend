@@ -1,5 +1,5 @@
 [
-    { "id": 0, "name": "Home", "url": "/home"},
-    { "id": 1, "name": "New Fiesta", "url": "/create" },
-    { "id": 2, "name": "Profile", "url": "/user/" }
+  { "id": 0, "name": "Home", "url": "/home" },
+  { "id": 1, "name": "New Fiesta", "url": "/create" },
+  { "id": 2, "name": "Profile", "url": "/user/" }
 ]
