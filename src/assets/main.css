@@ -108,3 +108,16 @@ input:focus {
 .invalidRequest p {
   color: #ff1717;
 }
+
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 0px;
+}
+
+*::-webkit-scrollbar-track {
+  background: none;
+}
+*::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #3c699f66, #783a8d66);
+  border-radius: 3px;
+}

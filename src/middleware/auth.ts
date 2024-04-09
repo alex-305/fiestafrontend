@@ -28,7 +28,7 @@ export const login = async (username: string, password: string) => {
     )
     .then(async (response) => {
       setToken(response.data.token)
-      try{
+      try {
         await AuthenticateToken()
         pushRoute(0)
       } catch {

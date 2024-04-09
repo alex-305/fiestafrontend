@@ -20,8 +20,19 @@
 </template>
 
 <script setup lang="ts">
+import { pushRoute } from '@/Helpers/routing/routeHandler'
 import { login } from '@/middleware/auth'
-import { ref } from 'vue'
+import { AuthenticateToken } from '@/middleware/jwt'
+import { onMounted, ref } from 'vue'
+
+onMounted(async () => {
+  try {
+    await AuthenticateToken()
+    pushRoute(0)
+  } catch (error) {
+    console.log(error)
+  }
+})
 
 const password = ref('')
 const username = ref('')

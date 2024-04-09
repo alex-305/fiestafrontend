@@ -1,12 +1,6 @@
 import { router } from '../../main'
 import { getRoutes } from './NavBarRoutes'
 
-export const PushHomeIfAtLanding = () => {
-  if(router.currentRoute.value.path == '/') {
-    pushRoute(0)
-  }
-}
-
 export const routeLeft = () => {
   let currentIndex = getIndex(router.currentRoute.value.path)
   if (currentIndex != 0) {

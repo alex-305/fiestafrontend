@@ -4,7 +4,7 @@
       v-for="route in routes"
       class="navnode"
       :key="route.url"
-      @click="routeHandler(route.url)"
+      @click="routeHandler(route.id)"
       :class="{ active: $route.path === route.url, inactive: $route.path !== route.url }"
     >
       {{ route.name }}
@@ -14,9 +14,12 @@
 
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
-import { routeLeft, routeRight } from '@/Helpers/routing/routeHandler'
+import { pushRoute, routeLeft, routeRight } from '@/Helpers/routing/routeHandler'
 import { getRoutes } from '@/Helpers/routing/NavBarRoutes'
 import { onMounted, onUnmounted } from 'vue'
+import type { User } from '@/middleware/getuser'
+import { AuthenticateToken } from '@/middleware/jwt'
+import { useUserStore } from '@/stores/UserStore'
 
 onMounted(() => {
   document.addEventListener('keyup', handleArrowKeys)
@@ -32,11 +35,19 @@ const handleArrowKeys = (event: KeyboardEvent) => {
   }
 }
 
-const router = useRouter()
 const routes = getRoutes()
 
-const routeHandler = (url: string) => {
-  router.push(url)
+const routeHandler = async (id: number) => {
+  if (id === 2) {
+    await getProfile()
+  }
+  pushRoute(id)
+}
+
+const getProfile = async () => {
+  const userData: User = await AuthenticateToken()
+  const userStore = useUserStore()
+  userStore.changeUsername(userData.username)
 }
 
 onUnmounted(() => {
@@ -64,7 +75,7 @@ onUnmounted(() => {
 
 .inactive {
   color: var(--bodyColor);
-  background: linear-gradient(to right, #bcffb1,#bbfffa);
+  background: linear-gradient(to right, #bcffb1, #bbfffa);
   font-size: 15px;
 }
 

@@ -29,7 +29,13 @@ export const AuthenticateToken = async (): Promise<User> => {
       console.log(response.data)
       return response
     })
-    .catch((Error) => {
+    .catch((error) => {
+      if (axios.isAxiosError(error)) {
+        if (error.response && localStorage.getItem('jwt_token') && error.response.status == 401) {
+          localStorage.removeItem('jwt_token')
+          console.log(error)
+        }
+      }
       throw Error
     })
   const userData: User = {
