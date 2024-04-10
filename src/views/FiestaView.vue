@@ -1,20 +1,29 @@
 <template>
-<div>
+  <div>
     <div>
-        <NavBar />
+      <NavBar />
     </div>
     <div class="parentDiv" v-if="isDataloaded">
       <div class="boxShadow nodeDiv titleDiv">
-        <h2>{{ title }}</h2>
-        <h5><a :href="userProfile">@{{ username }}</a></h5>
+        <div>
+          <h2>{{ title }}</h2>
+          <h5>
+            <a :href="userProfile">@{{ username }}</a>
+          </h5>
+        </div>
+        <div class="likeDiv">
+          <button v-if="!userLiked" class="likeButton" @click="clickedLike">♡</button>
+          <button v-else class="likeButton" @click="clickedLike">❤️</button>
+          <p>{{ likeCount }}</p>
+        </div>
       </div>
       <div class="imagesDiv">
         <div v-for="i in images" :key="i">
-          <img :src="SERVER_BASE_URL + '/image/'+ i" />
+          <img :src="SERVER_BASE_URL + '/image/' + i" />
         </div>
       </div>
     </div>
-</div>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -24,14 +33,34 @@ import type { ResponseData } from '@/middleware/fiesta'
 import { SERVER_BASE_URL } from '@/Helpers/server'
 import { onBeforeMount, ref } from 'vue'
 import { useRoute } from 'vue-router'
+import { PostLike } from '@/middleware/useractions'
 
 const title = ref('')
 const images = ref<string[]>([])
 const canEdit = ref(false)
 const isDataloaded = ref(false)
 const postDate = ref<Date>()
+const userLiked = ref(false)
 const username = ref('')
 const userProfile = ref('/user/')
+const fiestaid = useRoute().params.fiestaid.toString()
+const likeCount = ref<number>(0)
+
+const clickedLike = async() => {
+  console.log(fiestaid)
+  try {
+
+    await PostLike(fiestaid)
+
+    likeCount.value = userLiked.value ? likeCount.value - 1 : likeCount.value + 1
+
+    userLiked.value = !userLiked.value
+
+  } catch(error) {
+    console.error(error)
+  }
+
+}
 
 onBeforeMount(async () => {
   const route = useRoute()
@@ -46,7 +75,9 @@ onBeforeMount(async () => {
     canEdit.value = response.can_edit
     images.value = response.images
     postDate.value = response.post_date
-    userProfile.value+=username.value
+    userProfile.value += username.value
+    userLiked.value = response.userliked
+    likeCount.value = response.likecount
     isDataloaded.value = true
   } catch {
     console.error(Error)
@@ -61,6 +92,17 @@ onBeforeMount(async () => {
   flex-wrap: wrap;
   flex-direction: row;
   border-radius: 20px;
+}
+
+.likeDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.likeDiv p {
+  font-size: 25px;
 }
 
 .imagesDiv div {
@@ -125,6 +167,13 @@ onBeforeMount(async () => {
 * {
   margin: 0px;
   padding: 0px;
+}
+
+.likeButton {
+  font-size: 30px;
+  color: red;
+  background: transparent;
+  box-shadow: none;
 }
 
 </style>

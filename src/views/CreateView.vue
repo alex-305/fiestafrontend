@@ -14,7 +14,7 @@
     </div>
     <br />
     <div class="imagesDiv">
-      <div v-for="(i, index) in images" :key="i.filename">
+      <div v-for="(i, index) in images.slice().reverse()" :key="i.filename">
         <img :src="i.imageURL" />
         <button @click="removeImage(i.filename, index)">X</button>
       </div>

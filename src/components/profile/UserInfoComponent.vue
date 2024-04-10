@@ -1,7 +1,11 @@
 <template>
   <div class="staticBoxShadow nodeDiv userDivs">
-    <div>
+    <div class="usernameDiv">
       <h3>@{{ username }}</h3>
+      <div v-if="!props.canEdit">
+        <button @click="followUser" v-if="!isFollowing">Follow</button>
+        <button @click="followUser" v-else>✓Following</button>
+      </div>
     </div>
     <div class="nameDescDivider"></div>
     <div v-if="!canEdit">
@@ -30,6 +34,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { PostUserUpdate } from '@/middleware/updateuser'
+import { PostFollow } from '@/middleware/useractions'
 
 const props = defineProps({
   username: {
@@ -43,13 +48,23 @@ const props = defineProps({
   canEdit: {
     type: Boolean,
     requiried: true
+  },
+  isFollowing: {
+    type: Boolean,
+    required: false,
+    default: false
   }
 })
 
 const username = props.username ?? ''
 const newDescription = ref(props.description ?? '')
-const canEdit = props.canEdit ?? ''
 const currentDescription = ref(props.description ?? '')
+const isFollowing = ref(props.isFollowing)
+
+const followUser = () => {
+  PostFollow(username)
+  isFollowing.value = !isFollowing.value
+}
 
 const updateDescription = () => {
   PostUserUpdate(username, newDescription.value)
@@ -58,6 +73,17 @@ const updateDescription = () => {
 </script>
 
 <style scoped>
+.usernameDiv {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+
+.usernameDiv button {
+  background: linear-gradient(to right, #bdff87, #5fff9c);
+  padding: 5px;
+}
+
 .descriptionEditDiv {
   width: 100%;
   height: 100%;
@@ -98,6 +124,10 @@ const updateDescription = () => {
   align-items: center;
   padding: 5px;
   max-height: 200px;
+}
+
+.userDivs div h3 {
+  text-shadow: 1px 1px 10px #ffffff;
 }
 
 * {
