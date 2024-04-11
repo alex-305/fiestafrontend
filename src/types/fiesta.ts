@@ -11,4 +11,5 @@ export type SmallFiesta = {
   id: string
   username: string
   coverimage: string
+  post_date: Date
 }

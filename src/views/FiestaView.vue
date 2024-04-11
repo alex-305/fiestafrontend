@@ -4,7 +4,7 @@
       <NavBar />
     </div>
     <div class="parentDiv" v-if="isDataloaded">
-      <div class="boxShadow nodeDiv titleDiv">
+      <div class="staticBoxShadow nodeDiv titleDiv">
         <div>
           <h2>{{ title }}</h2>
           <h5>
@@ -22,6 +22,9 @@
           <img :src="SERVER_BASE_URL + '/image/' + i" />
         </div>
       </div>
+      <div>
+        <CommentSection :fiestaid="fiestaid"/>
+      </div>
     </div>
   </div>
 </template>
@@ -34,6 +37,7 @@ import { SERVER_BASE_URL } from '@/Helpers/server'
 import { onBeforeMount, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { PostLike } from '@/middleware/useractions'
+import CommentSection from '@/components/fiesta/CommentSection.vue'
 
 const title = ref('')
 const images = ref<string[]>([])
@@ -46,20 +50,17 @@ const userProfile = ref('/user/')
 const fiestaid = useRoute().params.fiestaid.toString()
 const likeCount = ref<number>(0)
 
-const clickedLike = async() => {
+const clickedLike = async () => {
   console.log(fiestaid)
   try {
-
     await PostLike(fiestaid)
 
     likeCount.value = userLiked.value ? likeCount.value - 1 : likeCount.value + 1
 
     userLiked.value = !userLiked.value
-
-  } catch(error) {
+  } catch (error) {
     console.error(error)
   }
-
 }
 
 onBeforeMount(async () => {
@@ -78,9 +79,10 @@ onBeforeMount(async () => {
     userProfile.value += username.value
     userLiked.value = response.userliked
     likeCount.value = response.likecount
+
     isDataloaded.value = true
-  } catch {
-    console.error(Error)
+  } catch(error) {
+    console.error(error)
   }
 })
 </script>
@@ -175,5 +177,4 @@ onBeforeMount(async () => {
   background: transparent;
   box-shadow: none;
 }
-
 </style>

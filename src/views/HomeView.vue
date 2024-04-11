@@ -10,6 +10,7 @@
       <div v-if="isDataloaded" class="fiestasDiv">
         <div v-for="fiesta in fiestas" :key="fiesta.id">
           <SmallFiestaComponent
+            :post_date="fiesta.post_date"
             :id="fiesta.id"
             :username="fiesta.username"
             :title="fiesta.title"
@@ -30,10 +31,10 @@ import type { SmallFiesta } from '@/types/fiesta'
 import { onBeforeMount, ref } from 'vue'
 import HomeToggleComponent from '@/components/home/HomeToggleComponent.vue'
 
-let typeValue = "Following"
+let typeValue = 'Following'
 
-const handleChange = async(listType: string) => {
-  if(listType===typeValue) return;
+const handleChange = async (listType: string) => {
+  if (listType === typeValue) return
   const fiestasResponse: SmallFiesta[] = await getFiestaList(listType)
   fiestas.value = fiestasResponse
   typeValue = listType
@@ -44,7 +45,7 @@ const isDataloaded = ref(false)
 
 onBeforeMount(async () => {
   try {
-    const fiestasResponse: SmallFiesta[] = await getFiestaList("Following")
+    const fiestasResponse: SmallFiesta[] = await getFiestaList('Following')
     fiestas.value = fiestasResponse
 
     isDataloaded.value = true
@@ -79,5 +80,4 @@ onBeforeMount(async () => {
   padding: 5px;
   border-radius: 10px;
 }
-
 </style>

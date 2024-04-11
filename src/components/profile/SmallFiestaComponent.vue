@@ -4,10 +4,12 @@
       <img :src="props.picURL" />
       <div class="overlayedText">
         <h3>{{ props.title }}</h3>
-        <div class="nameDescDivider"></div>
+        <div class="divider"></div>
         <h4>
           <a :href="userProfile">@{{ props.username }}</a>
         </h4>
+        <div class="divider"></div>
+        <h5>{{ formatDate(new Date(props.post_date)) }}</h5>
       </div>
     </div>
   </a>
@@ -27,22 +29,32 @@ const props = defineProps({
     type: String,
     required: true
   },
+  post_date: {
+    type: Date,
+    required: true
+  },
   id: {
     type: String,
     required: true
   }
 })
 
+const formatDate = (date:Date):string => {
+  const options: Intl.DateTimeFormatOptions = {
+    month: 'long',
+    day: '2-digit',
+    year: 'numeric',
+  }
+
+  return date.toLocaleDateString('en-us', options)
+
+}
+
 const userProfile = '/user/' + props.username
 </script>
 
 <style scoped>
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-.nameDescDivider {
+.divider {
   height: 3px;
   border-radius: 10px;
   margin: 0px;
@@ -76,6 +88,15 @@ a {
   text-overflow: ellipsis;
 }
 
+.overlayedText h5 {
+  color: white;
+  text-shadow:
+    1px 1px 10px #000000,
+    1px 1px 10px #000000,
+    1px 1px 10px #000000;
+  text-overflow: ellipsis;
+}
+
 .container {
   position: relative;
   height: 250px;
@@ -87,12 +108,12 @@ a {
   border: 5px ridge #fffeaa67;
 }
 
-.container img {
+img {
   height: 100%;
   width: auto;
   max-width: 100%;
   max-height: 100%;
-  filter: brightness(1.1);
+  filter: brightness(1.1) blur(2px);
 }
 
 * {

@@ -1,7 +1,5 @@
 <template>
-  <div 
-  @drop="handleDroppedFile"
-  @dragover.prevent>
+  <div @drop="handleDroppedFile" @dragover.prevent>
     <button @click="buttonClicked" class="plusButton">+</button>
     <input id="file-upload" type="file" accept="image/*" :onchange="handleSelectedFile" />
     <div v-if="badUpload" class="invalidRequest">
@@ -37,7 +35,7 @@ const handleSelectedFile = async () => {
   }
 }
 
-const postFile = async(file:File) => {
+const postFile = async (file: File) => {
   try {
     const fileURL = await PostImage(file)
     badUpload.value = false
@@ -53,10 +51,10 @@ const postFile = async(file:File) => {
   }
 }
 
-const handleDroppedFile = async(event:DragEvent) => {
+const handleDroppedFile = async (event: DragEvent) => {
   event?.preventDefault()
   const files = event?.dataTransfer?.files
-  if(files!=undefined && files.length > 0) {
+  if (files != undefined && files.length > 0) {
     await postFile(files[0])
   }
 }

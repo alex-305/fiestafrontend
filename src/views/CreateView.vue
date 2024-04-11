@@ -13,7 +13,7 @@
       <Uploader @newImage="handlNewImage" />
     </div>
     <br />
-    <div class="imagesDiv">
+    <div class="manyViewDiv imagesDiv">
       <div v-for="(i, index) in images.slice().reverse()" :key="i.filename">
         <img :src="i.imageURL" />
         <button @click="removeImage(i.filename, index)">X</button>
@@ -77,11 +77,6 @@ const createFiesta = async () => {
 </script>
 
 <style scoped>
-.imagesDiv {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-}
 
 .imagesDiv div {
   height: 200px;

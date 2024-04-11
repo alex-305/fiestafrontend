@@ -3,11 +3,13 @@
     <div v-for="view in viewsList" :key="view">
       <button
         :class="{
-            active: activeElement === view, 
-            inactive : activeElement !== view}"
-
+          active: activeElement === view,
+          inactive: activeElement !== view
+        }"
         @click="clickedButton(view)"
-        >{{ view }}</button>
+      >
+        {{ view }}
+      </button>
     </div>
   </div>
 </template>
@@ -15,15 +17,15 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-const activeElement = ref("Following")
+const activeElement = ref('Following')
 
 const emit = defineEmits<{
   (e: 'change', type: string): void
 }>()
 
-const clickedButton = (element:string) => {
-    activeElement.value = element
-    emit('change', element)
+const clickedButton = (element: string) => {
+  activeElement.value = element
+  emit('change', element)
 }
 
 const viewsList = ref<string[]>(['Following', 'Latest'])
@@ -40,11 +42,11 @@ const viewsList = ref<string[]>(['Following', 'Latest'])
 }
 
 .active {
-    background: linear-gradient(to right, #d2ff80, #fbff7f);
+  background: linear-gradient(to right, #d2ff80, #fbff7f);
 }
 
 .inactive {
-    background: linear-gradient(to right, #00648c7c, #009d5c7c);
+  background: linear-gradient(to right, #00648c7c, #009d5c7c);
 }
 
 .container button {

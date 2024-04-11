@@ -1,5 +1,5 @@
 import { SERVER_BASE_URL } from '@/Helpers/server'
-//import type { comment } from '@/types/comment'
+import type { Comment } from '@/types/comment'
 import type { Fiesta, SmallFiesta } from '@/types/fiesta'
 import axios from 'axios'
 
@@ -11,7 +11,7 @@ export type ResponseData = {
   post_date: Date
   userliked: boolean
   likecount: number
-  //comments: comment[]
+  comments: Comment[]
 }
 
 export const postFiesta = async (fiesta: Fiesta): Promise<string> => {
@@ -51,7 +51,7 @@ export const getFiesta = async (fiesta: string): Promise<ResponseData> => {
         post_date: new Date(response.data.post_date),
         userliked: response.data.userliked,
         likecount: response.data.likecount,
-        //comments: JSON.parse(response.data.comments)
+        comments: response.data.comments,
       }
       console.log(response)
       return responseData
@@ -61,18 +61,17 @@ export const getFiesta = async (fiesta: string): Promise<ResponseData> => {
     })
 }
 
-export const getFiestaList = async (type:string): Promise<SmallFiesta[]> => {
+export const getFiestaList = async (type: string): Promise<SmallFiesta[]> => {
   const token = localStorage.getItem('jwt_token') ?? ''
 
   return await axios
-    .get(SERVER_BASE_URL + '/fiesta/'+type.toLowerCase(), {
+    .get(SERVER_BASE_URL + '/fiesta/' + type.toLowerCase(), {
       headers: {
         Authorization: `Bearer ${token}`
-      },
+      }
     })
     .then((response) => {
-      const responseData: SmallFiesta[] = response.data
-      return responseData
+      return response.data
     })
     .catch((error) => {
       console.error(error)

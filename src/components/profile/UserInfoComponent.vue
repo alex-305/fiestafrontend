@@ -2,7 +2,12 @@
   <div class="staticBoxShadow nodeDiv userDivs">
     <div class="usernameDiv">
       <h3>@{{ username }}</h3>
-      <div v-if="!props.canEdit">
+      <button
+      v-if="canEdit"
+      @click="logout"
+      class="negativeButton"
+      >Logout</button>
+      <div class="followButtonDiv" v-if="!props.canEdit">
         <button @click="followUser" v-if="!isFollowing">Follow</button>
         <button @click="followUser" v-else>✓Following</button>
       </div>
@@ -35,6 +40,7 @@
 import { ref } from 'vue'
 import { PostUserUpdate } from '@/middleware/updateuser'
 import { PostFollow } from '@/middleware/useractions'
+import { router } from '../../main'
 
 const props = defineProps({
   username: {
@@ -66,6 +72,11 @@ const followUser = () => {
   isFollowing.value = !isFollowing.value
 }
 
+const logout = () => {
+  localStorage.removeItem('jwt_token')
+  router.push('/')
+}
+
 const updateDescription = () => {
   PostUserUpdate(username, newDescription.value)
   currentDescription.value = newDescription.value
@@ -79,7 +90,7 @@ const updateDescription = () => {
   gap: 5px;
 }
 
-.usernameDiv button {
+.followButtonDiv button {
   background: linear-gradient(to right, #bdff87, #5fff9c);
   padding: 5px;
 }

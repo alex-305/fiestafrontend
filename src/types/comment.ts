@@ -1,4 +1,6 @@
-export type comment = {
-  text: string
-  user: string
+export type Comment = {
+  content: string
+  username: string
+  id: string
+  post_date: Date
 }

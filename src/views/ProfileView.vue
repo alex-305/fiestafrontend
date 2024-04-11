@@ -16,6 +16,7 @@
     <div class="fiestasDiv">
       <div v-for="fiesta in fiestas" :key="fiesta.id">
         <SmallFiestaComponent
+          :post_date="fiesta.post_date"
           :id="fiesta.id"
           :username="fiesta.username"
           :title="fiesta.title"

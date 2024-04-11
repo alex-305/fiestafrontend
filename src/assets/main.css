@@ -78,6 +78,11 @@ input:focus {
     0 6px 20px 0 rgba(0, 0, 0, 0.2);
 }
 
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
 .containerDiv {
   width: 100%;
   display: grid;
@@ -93,8 +98,20 @@ input:focus {
   margin-bottom: 10px;
 }
 
+.manyViewDiv {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  flex-direction: row;
+  border-radius: 20px;
+}
+
+.manyViewDiv div {
+  margin-right: 5px;
+}
+
 .negativeButton {
-  background: linear-gradient(to right, #c85dcebf, #ce5d76bf);
+  background: linear-gradient(to right, #c85dcebf,#ce5d86bf, #ce5d5dbf);
 }
 
 .positiveButton {
