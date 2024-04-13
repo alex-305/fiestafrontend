@@ -1,11 +1,12 @@
 import { SERVER_BASE_URL } from '@/Helpers/server'
 import axios from 'axios'
 
-export const PostImage = async (image: File): Promise<string> => {
+export const PostImage = async (image: File, fiestaid:string=""): Promise<string> => {
   const token = localStorage.getItem('jwt_token') ?? ''
-
+  console.log(fiestaid)
   const formData = new FormData()
   formData.append('image', image)
+  formData.append('fiestaid', fiestaid)
 
   const response = await axios
     .post(SERVER_BASE_URL + '/image', formData, {

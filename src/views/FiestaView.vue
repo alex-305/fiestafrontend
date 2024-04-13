@@ -7,9 +7,10 @@
       <div class="staticBoxShadow nodeDiv titleDiv">
         <div>
           <h2>{{ title }}</h2>
-          <h5>
-            <a :href="userProfile">@{{ username }}</a>
-          </h5>
+          <h5>{{ FormatDate(new Date(postDate ?? "")) }}</h5>
+        </div>
+        <div>
+          <PostersComponent :isOwner="isOwner" :fiestaid="fiestaid"/>
         </div>
         <div class="likeDiv">
           <button v-if="!userLiked" class="likeButton" @click="clickedLike">♡</button>
@@ -20,6 +21,9 @@
       <div class="imagesDiv">
         <div v-for="i in images" :key="i">
           <img :src="SERVER_BASE_URL + '/image/' + i" />
+        </div>
+        <div v-if="canPost">
+          <Uploader :fiestaid="fiestaid" @newImage="handleNewImage" />
         </div>
       </div>
       <div>
@@ -38,10 +42,15 @@ import { onBeforeMount, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { PostLike } from '@/middleware/useractions'
 import CommentSection from '@/components/fiesta/CommentSection.vue'
+import { FormatDate } from '@/Helpers/date/date'
+import type { Image } from '@/types/image'
+import Uploader from '@/components/fiesta/UploaderComponent.vue'
+import PostersComponent from '@/components/fiesta/PostersComponent.vue'
 
 const title = ref('')
 const images = ref<string[]>([])
-const canEdit = ref(false)
+const isOwner = ref(false)
+const canPost = ref(false)
 const isDataloaded = ref(false)
 const postDate = ref<Date>()
 const userLiked = ref(false)
@@ -63,6 +72,12 @@ const clickedLike = async () => {
   }
 }
 
+const handleNewImage = async (image:Image) => {
+  console.log("test")
+  console.log(image)
+  images.value.push(image.filename)
+}
+
 onBeforeMount(async () => {
   const route = useRoute()
   const fiestaPath =
@@ -73,7 +88,9 @@ onBeforeMount(async () => {
     const response: ResponseData = await getFiesta(fiestaPath)
     title.value = response.title
     username.value = response.username
-    canEdit.value = response.can_edit
+    isOwner.value = response.is_owner
+    canPost.value = response.can_post
+    console.log("isowner: " + response.is_owner + "canpost: " + response.can_post)
     images.value = response.images
     postDate.value = response.post_date
     userProfile.value += username.value

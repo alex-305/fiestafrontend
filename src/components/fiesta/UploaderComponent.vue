@@ -14,6 +14,14 @@ import { PostImage } from '@/middleware/image'
 import { ref } from 'vue'
 import type { Image } from '@/types/image'
 
+const props = defineProps({
+  fiestaid:{
+    type: String,
+    required: false,
+    default: ""
+  }
+})
+
 const badUpload = ref(false)
 
 const buttonClicked = () => {
@@ -37,7 +45,7 @@ const handleSelectedFile = async () => {
 
 const postFile = async (file: File) => {
   try {
-    const fileURL = await PostImage(file)
+    const fileURL = await PostImage(file, props.fiestaid)
     badUpload.value = false
 
     let newImage: Image = {

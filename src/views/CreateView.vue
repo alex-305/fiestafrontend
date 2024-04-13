@@ -10,7 +10,7 @@
     <br />
     <div class="boxShadow nodeDiv inputDiv">
       <h2>Pics<span class="smaller"> or it didn't happen </span></h2>
-      <Uploader @newImage="handlNewImage" />
+      <Uploader @newImage="handleNewImage" />
     </div>
     <br />
     <div class="manyViewDiv imagesDiv">
@@ -38,7 +38,7 @@ import router from '@/router'
 const title = ref('')
 const images = ref<Image[]>([])
 
-const handlNewImage = (image: Image) => {
+const handleNewImage = (image: Image) => {
   console.log(image)
   images.value.push(image)
 }

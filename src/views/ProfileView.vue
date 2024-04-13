@@ -34,7 +34,7 @@ import SmallFiestaComponent from '@/components/profile/SmallFiestaComponent.vue'
 import type { SmallFiesta } from '@/types/fiesta'
 import { GetUser, getUserFiestas } from '@/middleware/getuser'
 import type { UserResponseData } from '@/middleware/getuser'
-import { onBeforeMount, ref } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { SERVER_BASE_URL } from '@/Helpers/server'
 
@@ -45,10 +45,12 @@ const isFollowing = ref(false)
 const isDataloaded = ref(false)
 const fiestas = ref<SmallFiesta[]>([])
 
-const userParam = useRoute().params.username as string
+const route = useRoute()
+const userParam = ref(useRoute().params.username as string)
 
 const fetchUserData = async (uname: string) => {
   try {
+    isDataloaded.value = false
     const userResponse: UserResponseData = await GetUser(uname)
     username.value = userResponse.user.username
     description.value = userResponse.user.description
@@ -64,8 +66,13 @@ const fetchUserData = async (uname: string) => {
   }
 }
 
-onBeforeMount(async () => {
-  await fetchUserData(userParam)
+watch(() => route.params.user, async(newUser) => {
+  console.log(newUser)
+  await fetchUserData(newUser as string)
+})
+
+onMounted(async () => {
+  await fetchUserData(userParam.value)
 })
 </script>
 

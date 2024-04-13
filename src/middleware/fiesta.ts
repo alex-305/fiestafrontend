@@ -7,7 +7,8 @@ export type ResponseData = {
   username: string
   title: string
   images: string[]
-  can_edit: boolean
+  is_owner: boolean
+  can_post: boolean
   post_date: Date
   userliked: boolean
   likecount: number
@@ -43,16 +44,7 @@ export const getFiesta = async (fiesta: string): Promise<ResponseData> => {
       }
     })
     .then((response) => {
-      const responseData: ResponseData = {
-        username: response.data.username,
-        title: response.data.title,
-        images: response.data.images,
-        can_edit: response.data.can_edit,
-        post_date: new Date(response.data.post_date),
-        userliked: response.data.userliked,
-        likecount: response.data.likecount,
-        comments: response.data.comments,
-      }
+      const responseData:ResponseData = response.data
       console.log(response)
       return responseData
     })

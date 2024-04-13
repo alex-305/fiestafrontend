@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { SERVER_BASE_URL } from '../Helpers/server'
+import { SERVER_BASE_URL } from '@/Helpers/server'
 
 export const PostUserUpdate = async (user: string, description: string) => {
   const token = localStorage.getItem('jwt_token') ?? ''

@@ -9,13 +9,14 @@
           <a :href="userProfile">@{{ props.username }}</a>
         </h4>
         <div class="divider"></div>
-        <h5>{{ formatDate(new Date(props.post_date)) }}</h5>
+        <h5>{{ FormatDate(new Date(props.post_date)) }}</h5>
       </div>
     </div>
   </a>
 </template>
 
 <script setup lang="ts">
+import { FormatDate } from '@/Helpers/date/date'
 const props = defineProps({
   username: {
     type: String,
@@ -38,17 +39,6 @@ const props = defineProps({
     required: true
   }
 })
-
-const formatDate = (date:Date):string => {
-  const options: Intl.DateTimeFormatOptions = {
-    month: 'long',
-    day: '2-digit',
-    year: 'numeric',
-  }
-
-  return date.toLocaleDateString('en-us', options)
-
-}
 
 const userProfile = '/user/' + props.username
 </script>
