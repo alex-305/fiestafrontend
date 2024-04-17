@@ -34,11 +34,28 @@ export const postFiesta = async (fiesta: Fiesta): Promise<string> => {
   return response.data.path
 }
 
-export const getFiesta = async (fiesta: string): Promise<ResponseData> => {
+export const DeleteFiesta = async(fiestaid: string) => {
   const token = localStorage.getItem('jwt_token') ?? ''
 
   return await axios
-    .get(SERVER_BASE_URL + fiesta, {
+  .delete(SERVER_BASE_URL + '/fiesta/' + fiestaid, {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  })
+  .then((response) => {
+    console.log(response)
+  })
+  .catch((error) => {
+    throw error
+  })
+}
+
+export const getFiesta = async (fiestaid: string): Promise<ResponseData> => {
+  const token = localStorage.getItem('jwt_token') ?? ''
+
+  return await axios
+    .get(SERVER_BASE_URL + '/fiesta/' + fiestaid, {
       headers: {
         Authorization: `Bearer ${token}`
       }
@@ -57,7 +74,7 @@ export const getFiestaList = async (type: string): Promise<SmallFiesta[]> => {
   const token = localStorage.getItem('jwt_token') ?? ''
 
   return await axios
-    .get(SERVER_BASE_URL + '/fiesta/' + type.toLowerCase(), {
+    .get(SERVER_BASE_URL + '/fiestas/' + type.toLowerCase(), {
       headers: {
         Authorization: `Bearer ${token}`
       }

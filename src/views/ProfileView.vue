@@ -49,8 +49,8 @@ const route = useRoute()
 const userParam = ref(useRoute().params.username as string)
 
 const fetchUserData = async (uname: string) => {
+  isDataloaded.value = false
   try {
-    isDataloaded.value = false
     const userResponse: UserResponseData = await GetUser(uname)
     username.value = userResponse.user.username
     description.value = userResponse.user.description

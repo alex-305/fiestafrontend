@@ -45,6 +45,7 @@ const props = defineProps({
 const comment = async() => {
   const comment = await postComment(newComment.value, props.fiestaid)
   comments.value.push(comment)
+  newComment.value = ""
 }
 
 onMounted(async() => {

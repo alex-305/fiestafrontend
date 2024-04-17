@@ -16,8 +16,11 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useListTypeStore } from  '@/stores/FiestaListType'
 
-const activeElement = ref('Following')
+const typeStore = useListTypeStore()
+
+const activeElement = ref(typeStore.getType())
 
 const emit = defineEmits<{
   (e: 'change', type: string): void
@@ -25,10 +28,11 @@ const emit = defineEmits<{
 
 const clickedButton = (element: string) => {
   activeElement.value = element
+  typeStore.changeType(element)
   emit('change', element)
 }
 
-const viewsList = ref<string[]>(['Following', 'Latest'])
+const viewsList = ref<string[]>(['Latest','Following', 'Popular'])
 </script>
 
 <style scoped>
@@ -36,9 +40,10 @@ const viewsList = ref<string[]>(['Following', 'Latest'])
   display: flex;
   justify-content: center;
   height: 50px;
-  width: 200px;
+  width: 300px;
   background: linear-gradient(to right, #e6dbdb, #b9aeae);
   border-radius: 20px;
+  align-items: center;
 }
 
 .active {

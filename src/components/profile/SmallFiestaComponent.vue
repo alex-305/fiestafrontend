@@ -1,5 +1,5 @@
 <template>
-  <a :href="'/user/' + props.username + '/fiesta/' + props.id">
+  <a :href="'/fiesta/' + props.id">
     <div class="boxShadow container">
       <img :src="props.picURL" />
       <div class="overlayedText">

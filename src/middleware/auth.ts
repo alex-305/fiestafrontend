@@ -43,6 +43,7 @@ export const login = async (username: string, password: string) => {
 }
 
 export const createAccount = async (username: string, password: string) => {
+  localStorage.removeItem('jwt_token')
   const response = await axios
     .post(
       SERVER_BASE_URL + '/createAccount',

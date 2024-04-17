@@ -16,13 +16,18 @@
           <button v-if="!userLiked" class="likeButton" @click="clickedLike">♡</button>
           <button v-else class="likeButton" @click="clickedLike">❤️</button>
           <p>{{ likeCount }}</p>
+          <button
+          class="negativeButton deleteButton"
+          v-if="isOwner"
+          @click="deleteFiesta"
+          >DELETE</button>
         </div>
       </div>
       <div class="imagesDiv">
         <div v-for="i in images" :key="i">
           <img :src="SERVER_BASE_URL + '/image/' + i" />
         </div>
-        <div v-if="canPost">
+        <div v-if="canPost || isOwner">
           <Uploader :fiestaid="fiestaid" @newImage="handleNewImage" />
         </div>
       </div>
@@ -35,7 +40,7 @@
 
 <script setup lang="ts">
 import NavBar from '@/components/NavBar.vue'
-import { getFiesta } from '@/middleware/fiesta'
+import { getFiesta, DeleteFiesta } from '@/middleware/fiesta'
 import type { ResponseData } from '@/middleware/fiesta'
 import { SERVER_BASE_URL } from '@/Helpers/server'
 import { onBeforeMount, ref } from 'vue'
@@ -46,6 +51,7 @@ import { FormatDate } from '@/Helpers/date/date'
 import type { Image } from '@/types/image'
 import Uploader from '@/components/fiesta/UploaderComponent.vue'
 import PostersComponent from '@/components/fiesta/PostersComponent.vue'
+import { pushProfile } from '@/Helpers/routing/routeHandler'
 
 const title = ref('')
 const images = ref<string[]>([])
@@ -72,6 +78,15 @@ const clickedLike = async () => {
   }
 }
 
+const deleteFiesta = async () => {
+  try {
+    await DeleteFiesta(fiestaid)
+    pushProfile()
+  } catch(error) {
+    console.error(error)
+  }
+}
+
 const handleNewImage = async (image:Image) => {
   console.log("test")
   console.log(image)
@@ -80,12 +95,10 @@ const handleNewImage = async (image:Image) => {
 
 onBeforeMount(async () => {
   const route = useRoute()
-  const fiestaPath =
-    '/user/' + route.params.username.toString() + '/fiesta/' + route.params.fiestaid.toString()
 
   try {
-    console.log(fiestaPath)
-    const response: ResponseData = await getFiesta(fiestaPath)
+    console.log(route.params.fiestaid.toString())
+    const response: ResponseData = await getFiesta(route.params.fiestaid.toString())
     title.value = response.title
     username.value = response.username
     isOwner.value = response.is_owner
@@ -119,9 +132,16 @@ onBeforeMount(async () => {
   justify-content: center;
   align-items: center;
 }
+.likeDiv button {
+  margin-left: 30px;
+}
 
 .likeDiv p {
   font-size: 25px;
+}
+
+.deleteButton {
+  padding: 3px;
 }
 
 .imagesDiv div {

@@ -29,7 +29,7 @@ const router = createRouter({
       component: ProfileView
     },
     {
-      path: '/user/:username/fiesta/:fiestaid',
+      path: '/fiesta/:fiestaid',
       name: 'fiesta',
       component: FiestaView
     }

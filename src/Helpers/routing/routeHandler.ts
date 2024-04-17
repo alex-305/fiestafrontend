@@ -1,18 +1,15 @@
+import type { User } from '@/middleware/getuser'
 import { router } from '../../main'
 import { getRoutes } from './NavBarRoutes'
+import { AuthenticateToken } from '@/middleware/jwt'
+import { useUserStore } from '@/stores/UserStore'
 
-export const routeLeft = () => {
-  let currentIndex = getIndex(router.currentRoute.value.path)
-  if (currentIndex != 0) {
-    pushRoute(--currentIndex)
-  }
+const getProfile = async () => {
+  const userData: User = await AuthenticateToken()
+  const userStore = useUserStore()
+  userStore.changeUsername(userData.username)
 }
-export const routeRight = () => {
-  let currentIndex = getIndex(router.currentRoute.value.path)
-  if (currentIndex != getRoutes().length - 1) {
-    pushRoute(++currentIndex)
-  }
-}
+
 export const pushRoute = (index: number) => {
   router.push(getPath(index))
 }
@@ -21,6 +18,7 @@ const getPath = (index: number) => {
   return getRoutes()[index].url
 }
 
-const getIndex = (url: string) => {
-  return getRoutes().findIndex((route: { url: string }) => route.url === url)
+export const pushProfile = async() => {
+  await getProfile()
+  pushRoute(2)
 }
