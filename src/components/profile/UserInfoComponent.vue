@@ -2,15 +2,15 @@
   <div class="staticBoxShadow nodeDiv userDivs">
     <div class="usernameDiv">
       <h3>@{{ username }}</h3>
+      <div>
+        <h5>Followers: {{ refFollowerCount }}</h5>
+        <h5>Following: {{ followingCount }}</h5>
+      </div>
       <button
       v-if="canEdit"
       @click="logout"
       class="negativeButton"
       >Logout</button>
-      <div>
-        <h5>Followers: {{ followerCount }}</h5>
-        <h5>Following: {{ followingCount }}</h5>
-      </div>
       <div class="followButtonDiv" v-if="!props.canEdit">
         <button @click="followUser" v-if="!isFollowing">Follow</button>
         <button @click="followUser" v-else>✓Following</button>
@@ -78,10 +78,14 @@ const username = props.username ?? ''
 const newDescription = ref(props.description ?? '')
 const currentDescription = ref(props.description ?? '')
 const isFollowing = ref(props.isFollowing)
+const refFollowerCount = ref(props.followerCount)
+const followingCount = props.followingCount
 
 const followUser = () => {
   PostFollow(username)
   isFollowing.value = !isFollowing.value
+  refFollowerCount.value = isFollowing.value ? refFollowerCount.value+=1 : refFollowerCount.value-=1
+  console.log(refFollowerCount)
 }
 
 const logout = () => {
