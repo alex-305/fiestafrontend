@@ -66,7 +66,7 @@ const fetchUserData = async (uname: string) => {
   }
 }
 
-watch(() => route.params.user, async(newUser) => {
+watch(() => route.params.username, async(newUser) => {
   console.log(newUser)
   await fetchUserData(newUser as string)
 })
