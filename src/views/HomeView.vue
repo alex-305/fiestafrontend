@@ -30,7 +30,9 @@ import { getFiestaList } from '@/middleware/fiesta'
 import type { SmallFiesta } from '@/types/fiesta'
 import { onBeforeMount, ref } from 'vue'
 import HomeToggleComponent from '@/components/home/HomeToggleComponent.vue'
+import { useListTypeStore } from  '@/stores/FiestaListType'
 
+const listTypeStore = useListTypeStore()
 let typeValue = 'Following'
 
 const handleChange = async (listType: string) => {
@@ -45,7 +47,7 @@ const isDataloaded = ref(false)
 
 onBeforeMount(async () => {
   try {
-    const fiestasResponse: SmallFiesta[] = await getFiestaList('Following')
+    const fiestasResponse: SmallFiesta[] = await getFiestaList(listTypeStore.getType())
     fiestas.value = fiestasResponse
 
     isDataloaded.value = true
