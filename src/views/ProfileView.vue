@@ -8,6 +8,8 @@
       :username="username"
       :description="description"
       :canEdit="canEdit"
+      :followerCount="followerCount"
+      :followingCount="followingCount"
     />
     <br />
     <div class="fiestaTitleDiv staticBoxShadow">
@@ -43,6 +45,8 @@ const description = ref('')
 const canEdit = ref(false)
 const isFollowing = ref(false)
 const isDataloaded = ref(false)
+const followerCount = ref(0)
+const followingCount = ref(0)
 const fiestas = ref<SmallFiesta[]>([])
 
 const route = useRoute()
@@ -56,6 +60,9 @@ const fetchUserData = async (uname: string) => {
     description.value = userResponse.user.description
     canEdit.value = userResponse.canEdit
     isFollowing.value = userResponse.isFollowing
+    followerCount.value = userResponse.followerCount
+    followingCount.value = userResponse.followingCount
+
 
     const fiestasResponse: SmallFiesta[] = await getUserFiestas(uname)
     fiestas.value = fiestasResponse

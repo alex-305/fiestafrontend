@@ -7,6 +7,10 @@
       @click="logout"
       class="negativeButton"
       >Logout</button>
+      <div>
+        <h5>Followers: {{ followerCount }}</h5>
+        <h5>Following: {{ followingCount }}</h5>
+      </div>
       <div class="followButtonDiv" v-if="!props.canEdit">
         <button @click="followUser" v-if="!isFollowing">Follow</button>
         <button @click="followUser" v-else>✓Following</button>
@@ -59,6 +63,14 @@ const props = defineProps({
     type: Boolean,
     required: false,
     default: false
+  },
+  followerCount: {
+    type: Number,
+    required: true,
+  },
+  followingCount: {
+    type: Number,
+    required: true
   }
 })
 

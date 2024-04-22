@@ -10,6 +10,8 @@ export type UserResponseData = {
   user: User
   canEdit: boolean
   isFollowing: boolean
+  followerCount: number
+  followingCount: number
 }
 
 export type FiestasResponseData = {
@@ -36,7 +38,9 @@ export const GetUser = async (user: string): Promise<UserResponseData> => {
       const responseData: UserResponseData = {
         user: userData,
         canEdit: response.data.CanEdit,
-        isFollowing: response.data.IsFollowing
+        isFollowing: response.data.IsFollowing,
+        followerCount: response.data.FollowerCount,
+        followingCount: response.data.FollowingCount,
       }
 
       return responseData
