@@ -25,7 +25,7 @@ The create view allows you to create a new fiesta by inputting a title and some 
 The final view on the navbar is the Profile view which displays any given users' profile. 
 ![Profile View](https://lh3.googleusercontent.com/pw/AP1GczMhcThlmd8cRSiMQNxzoAe7dKgD0i8wvC9K6pbleMLlGED78mYYYACKZFArU2_B1iZI2fzxMRPip5IZFE7mFWsoVzyQF8m3RLGeuHD9NSu_vWtbbA=w2400)
 
-Additionally, there is a fiesta view which allows you to vieiw any given fiesta.
+Additionally, there is a fiesta view which allows you to view any given fiesta.
 ![Fiesta View](https://lh3.googleusercontent.com/pw/AP1GczPQ2LcMBHlL82Ogv8FbIiJ5mI0DrpSM4IRyl7esZElFNdAltJFXi4hWtYTR-9e6Nc_2E4-zGTQeWLR5CtNoNQFRM14-dv9k7HxJ2sPfwmLCpOwr4dA=w2400)
 
 ## Features
