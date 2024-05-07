@@ -1,5 +1,13 @@
 # Fiesta.Pics Frontend - Social media platform for parties!
 
+## Features
+
+- **User Registration**: Create your account on Fiesta.Pics or login using your existing credentials.
+- **Make Posts**: Post a collection of images collectively known as a "fiesta"
+- **Follow Others**: Follow other users and let others follow you.
+- **Like Posts**: Like others' posts
+- **Responsive Design**: I leveraged Vue.js' ref system to create reactive components that update when you interact with it.
+
 ## Backend - https://github.com/alex-305/fiestabackend
 
 ## About
@@ -27,11 +35,3 @@ The final view on the navbar is the Profile view which displays any given users'
 
 Additionally, there is a fiesta view which allows you to view any given fiesta.
 ![Fiesta View](https://lh3.googleusercontent.com/pw/AP1GczPQ2LcMBHlL82Ogv8FbIiJ5mI0DrpSM4IRyl7esZElFNdAltJFXi4hWtYTR-9e6Nc_2E4-zGTQeWLR5CtNoNQFRM14-dv9k7HxJ2sPfwmLCpOwr4dA=w2400)
-
-## Features
-
-- **User Registration**: Create your account on Fiesta.Pics or login using your existing credentials.
-- **Make Posts**: Post a collection of images collectively known as a "fiesta"
-- **Follow Others**: Follow other users and let others follow you.
-- **Like Posts**: Like others' posts
-- **Responsive Design**: I leveraged Vue.js' ref system to create reactive components that update when you interact with it.
